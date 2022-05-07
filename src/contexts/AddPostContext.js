@@ -2,14 +2,15 @@ import {
   DescriptionState,
   ImageState,
   AreYouSureToDiscardThePostState,
+  AddPostState,
 } from "atoms/AddPost";
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import { useRecoilState } from "recoil";
 
 export const AddPostContext = createContext();
 
 export const AddPostProvider = ({ children }) => {
-  const [addPost, openAddPost] = useState(false);
+  const [addPost, openAddPost] = useRecoilState(AddPostState);
   const [areYouSureToDiscardThePost, openAreYouSureToDiscardThePost] =
     useRecoilState(AreYouSureToDiscardThePostState);
   const [image, setImage] = useRecoilState(ImageState);

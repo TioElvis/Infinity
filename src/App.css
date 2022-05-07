@@ -8,3 +8,8 @@ textarea {
   border: none;
   outline: none;
 }
+
+button {
+  border: none;
+  cursor: pointer;
+}

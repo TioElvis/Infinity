@@ -1,5 +1,10 @@
 import { atom } from "recoil";
 
+export const AddPostState = atom({
+  key: "AddPostKey",
+  default: false,
+});
+
 export const ImageState = atom({
   key: "ImageKey",
   default: null,
