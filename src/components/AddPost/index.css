@@ -1,0 +1,66 @@
+.addPost {
+  width: 30rem;
+  border-radius: 2px;
+  background-color: var(--addPost);
+  transition: 0.1s;
+  color: var(--white);
+  margin: auto;
+  margin-top: 10rem;
+}
+
+.addPost > header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 12rem 0.5rem 2rem;
+}
+
+.addPost > form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0.2rem;
+}
+
+.addPost > form > textarea {
+  width: 100%;
+  height: 8rem;
+  background-color: var(--addPost);
+  padding: 1.2rem;
+  font-size: 0.9rem;
+  color: var(--white);
+}
+
+.addPost > form > img {
+  width: 95%;
+  border-radius: 0.3rem;
+  max-height: 25rem;
+}
+
+.addToThePost {
+  width: 100%;
+  padding: 1rem;
+}
+
+.addToThePost > main {
+  width: 100%;
+  height: 3.6rem;
+  border: solid var(--input) 1px;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+
+.addToThePost .icon {
+  width: 1.6rem;
+}
+
+.addToThePost > main > label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.5rem;
+  align-items: center;
+}

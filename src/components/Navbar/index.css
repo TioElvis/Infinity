@@ -1,0 +1,95 @@
+.navbar {
+  width: 100%;
+  height: 5rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: var(--navbar);
+  color: var(--white);
+  z-index: 999;
+}
+
+.navbar > main {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.logo {
+  margin: auto 0;
+}
+
+.inputSearchContainer {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inputSearch {
+  width: 1rem;
+  height: 2.5rem;
+  padding-left: 1rem;
+  border: none;
+  border-radius: 0.125rem;
+  outline: none;
+  background-color: var(--input);
+  display: none;
+  color: var(--white);
+}
+
+.iconSearch {
+  padding: 0.6rem;
+  border-radius: 3px;
+  background-color: var(--input);
+  cursor: pointer;
+  display: none;
+}
+
+.iconsAndAvatar {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.avatar {
+  padding: 0.2rem 0.4rem;
+  display: flex;
+  justify-content: center;
+  color: var(--white);
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+}
+
+.avatar:hover {
+  background-color: var(--hover);
+}
+
+.avatar > img {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 100%;
+  object-fit: contain;
+}
+
+@media (min-width: 800px) {
+  .inputSearch {
+    display: inline-grid;
+    width: 15rem;
+  }
+
+  .iconSearch {
+    display: inline-grid;
+  }
+}
+
+@media (min-width: 1000px) {
+  .inputSearch {
+    width: 25rem;
+  }
+}
