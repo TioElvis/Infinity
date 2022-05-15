@@ -2,24 +2,27 @@ import "./index.css";
 import { ArrowLeftIcon, PhotographIcon } from "@heroicons/react/outline";
 import { useRecoilState } from "recoil";
 import {
-  AreYouSureToDiscardThePostState,
-  DescriptionState,
-  ImageState,
+  descriptionState,
+  imageState,
+  isDiscardPostState,
 } from "atoms/AddPost";
 import Label from "components/Label";
 import { useContext } from "react";
 import { AddPostContext } from "contexts/AddPostContext";
 import { Modal } from "@mui/material";
 import AreYouSureToDiscardThePost from "components/AreYouSureToDiscardThePost";
+import { UserContext } from "contexts/UserContext";
 
 function AddPost() {
-  const [image, setImage] = useRecoilState(ImageState);
-  const [description, setDescription] = useRecoilState(DescriptionState);
-  const [areYouSureToDiscardThePost, openAreYouSureToDiscardThePost] =
-    useRecoilState(AreYouSureToDiscardThePostState);
+  const [image, setImage] = useRecoilState(imageState);
+  const [description, setDescription] = useRecoilState(descriptionState);
+  const [isDiscardPost, openIsDiscardPost] = useRecoilState(isDiscardPostState);
 
   const contextAddPost = useContext(AddPostContext);
   const { close: closeAddPost } = contextAddPost;
+
+  const contextUser = useContext(UserContext);
+  const { nickName } = contextUser;
 
   const handleImage = (e) => {
     const reader = new FileReader();
@@ -46,11 +49,12 @@ function AddPost() {
           <textarea
             className="textarea"
             onChange={handleDescription}
-            placeholder={`What are you thinking, nickName?`}
+            placeholder={`What are you thinking, ${nickName}?`}
           />
           {image && <img src={image} />}
           <div className="addToThePost">
             <main>
+              <h4>Add to the post</h4>
               <Label
                 type="file"
                 id="inputUploadImage"
@@ -63,9 +67,9 @@ function AddPost() {
         </form>
       </div>
       <Modal
-        open={areYouSureToDiscardThePost}
+        open={isDiscardPost}
         onClose={() => {
-          openAreYouSureToDiscardThePost(false);
+          openIsDiscardPost(false);
         }}>
         <>
           <AreYouSureToDiscardThePost />

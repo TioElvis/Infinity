@@ -1,28 +1,27 @@
 import "./index.css";
 import {
-  AddPostState,
-  AreYouSureToDiscardThePostState,
-  DescriptionState,
-  ImageState,
+  addPostState,
+  descriptionState,
+  imageState,
+  isDiscardPostState,
 } from "atoms/AddPost";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 function AreYouSureToDiscardThePost() {
-  const [areYouSureToDiscardThePost, openAreYouSureToDiscardThePost] =
-    useRecoilState(AreYouSureToDiscardThePostState);
-  const [image, setImage] = useRecoilState(ImageState);
-  const [description, setDescription] = useRecoilState(DescriptionState);
-  const [openAddPost, setOpenAddPost] = useRecoilState(AddPostState);
+  const openIsDiscardPostState = useSetRecoilState(isDiscardPostState);
+  const setImage = useSetRecoilState(imageState);
+  const setDescription = useSetRecoilState(descriptionState);
+  const openAddPost = useSetRecoilState(addPostState);
 
   const closeAll = () => {
     setImage(null);
     setDescription("");
-    setOpenAddPost(false);
-    openAreYouSureToDiscardThePost(false);
+    openAddPost(false);
+    openIsDiscardPostState(false);
   };
 
   const closeAreYouSureToDiscardThePost = () => {
-    openAreYouSureToDiscardThePost(false);
+    openIsDiscardPostState(false);
   };
 
   return (

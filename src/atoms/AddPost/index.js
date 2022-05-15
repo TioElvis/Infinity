@@ -1,21 +1,21 @@
 import { atom } from "recoil";
 
-export const AddPostState = atom({
+export const addPostState = atom({
   key: "AddPostKey",
   default: false,
 });
 
-export const ImageState = atom({
+export const imageState = atom({
   key: "ImageKey",
   default: null,
 });
 
-export const DescriptionState = atom({
+export const descriptionState = atom({
   key: "DescriptionKey",
   default: null,
 });
 
-export const AreYouSureToDiscardThePostState = atom({
+export const isDiscardPostState = atom({
   key: "AreYouSureToDiscardThePostKey",
   default: false,
 });

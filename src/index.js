@@ -3,15 +3,17 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { RecoilRoot } from "recoil";
-import { AddPostProvider } from "contexts/AddPostContext";
+import { UserProvider } from "contexts/UserContext";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <RecoilRoot>
-      <AddPostProvider>
+      <UserProvider>
         <App />
-      </AddPostProvider>
+      </UserProvider>
     </RecoilRoot>
-  </React.StrictMode>
+  </BrowserRouter>
 );

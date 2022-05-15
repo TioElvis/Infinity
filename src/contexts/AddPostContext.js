@@ -1,29 +1,28 @@
 import {
-  DescriptionState,
-  ImageState,
-  AreYouSureToDiscardThePostState,
-  AddPostState,
+  descriptionState,
+  imageState,
+  isDiscardPostState,
+  addPostState,
 } from "atoms/AddPost";
 import { createContext } from "react";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 
 export const AddPostContext = createContext();
 
 export const AddPostProvider = ({ children }) => {
-  const [addPost, openAddPost] = useRecoilState(AddPostState);
-  const [areYouSureToDiscardThePost, openAreYouSureToDiscardThePost] =
-    useRecoilState(AreYouSureToDiscardThePostState);
-  const [image, setImage] = useRecoilState(ImageState);
-  const [description, setDescription] = useRecoilState(DescriptionState);
+  const openAddPost = useSetRecoilState(addPostState);
+  const openIsDiscardPost = useSetRecoilState(isDiscardPostState);
+  const image = useRecoilValue(imageState);
+  const description = useRecoilValue(descriptionState);
 
   const close = () => {
     // if there is img but not there is description
     if (image && !description) {
-      openAreYouSureToDiscardThePost(true);
+      openIsDiscardPost(true);
     }
     // if there is description but not there is img
     if (!image && description) {
-      openAreYouSureToDiscardThePost(true);
+      openIsDiscardPost(true);
     }
     // if there aren't img and descirption
     if (!image && !description) {
@@ -31,7 +30,7 @@ export const AddPostProvider = ({ children }) => {
     }
     // if there are img and description
     if (image && description) {
-      openAreYouSureToDiscardThePost(true);
+      openIsDiscardPost(true);
     }
   };
 

@@ -11,10 +11,10 @@ import { useRecoilState } from "recoil";
 import { useContext, useState } from "react";
 import AddPost from "components/AddPost";
 import { AddPostContext } from "contexts/AddPostContext";
-import { AddPostState } from "atoms/AddPost";
+import { addPostState } from "atoms/AddPost";
 
 function Navbar() {
-  const [addPost, openAddPost] = useRecoilState(AddPostState);
+  const [addPost, openAddPost] = useRecoilState(addPostState);
   const [menu, openMenu] = useState(false);
 
   const contextAddPost = useContext(AddPostContext);
