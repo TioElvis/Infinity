@@ -1,12 +1,12 @@
 .areYouSureToDiscardThePost {
   width: 18rem;
   height: 18rem;
-  background-color: rgb(25, 25, 25);
+  background-color: var(--backgroundAddPost);
   margin: auto;
   margin-top: 16rem;
   border-radius: 3px;
   padding: 2rem;
-  color: var(--white);
+  color: var(--letterColorWhite);
   text-align: center;
 }
 
@@ -27,6 +27,6 @@
 }
 
 .discard {
-  background-color: var(--red);
-  color: var(--white);
+  background-color: var(--redLight);
+  color: var(--letterColorWhite);
 }

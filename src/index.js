@@ -1,19 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import "./index.css";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
+import LoginPage from "pages/Auth/Login";
 import { RecoilRoot } from "recoil";
-import { UserProvider } from "contexts/UserContext";
-import { BrowserRouter } from "react-router-dom";
+import HomePage from "pages/Home";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
 root.render(
-  <BrowserRouter>
-    <RecoilRoot>
-      <UserProvider>
-        <App />
-      </UserProvider>
-    </RecoilRoot>
-  </BrowserRouter>
+  <RecoilRoot>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="/" element={<HomePage />} />
+        </Route>
+      </Routes>
+      <Routes>
+        <Route path="/auth/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
+  </RecoilRoot>
 );

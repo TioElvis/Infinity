@@ -2,64 +2,62 @@ import "./index.css";
 import {
   HeartIcon,
   HomeIcon,
-  SearchIcon,
-  PlusIcon,
   MenuIcon,
+  PlusIcon,
+  SearchIcon,
 } from "@heroicons/react/outline";
-import { Modal, Drawer } from "@mui/material";
-import { useRecoilState } from "recoil";
-import { useContext, useState } from "react";
-import AddPost from "components/AddPost";
-import { AddPostContext } from "contexts/AddPostContext";
-import { addPostState } from "atoms/AddPost";
+import { Modal } from "@mui/material";
+import { createPostState } from "atoms/createPostAtoms";
+import { userState } from "atoms/userAtoms";
+import { CreatePostContext } from "context/CreatePostContext";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import CreatePostComponent from "components/CreatePost";
 
 function Navbar() {
-  const [addPost, openAddPost] = useRecoilState(addPostState);
-  const [menu, openMenu] = useState(false);
+  const user = useRecoilValue(userState);
+  const [addP, openAddP] = useRecoilState(createPostState);
 
-  const contextAddPost = useContext(AddPostContext);
-  const { close: closeAddPost } = contextAddPost;
+  const contextCreatePost = useContext(CreatePostContext);
+  const { close } = contextCreatePost;
+
+  const open = () => {
+    openAddP(true);
+  };
 
   return (
     <>
-      <header className="navbar">
-        <main>
-          <h2 className="logo">Infinity</h2>
-          <div className="inputSearchContainer">
-            <input
-              type="text"
-              className="inputSearch"
-              placeholder="Search..."
-            />
-            <div className="iconSearch">
+      <header className="header">
+        <nav>
+          <Link to="/">
+            <h2>Infinity</h2>
+          </Link>
+          <div className="inputSearch">
+            <input type="text" placeholder="Search..." />
+            <div>
               <SearchIcon className="icon" />
             </div>
           </div>
-          <div className="iconsAndAvatar">
-            <HomeIcon className="icon" />
-            <HeartIcon className="icon" style={{ color: "var(--red)" }} />
-            <PlusIcon
-              className="icon"
-              onClick={() => {
-                openAddPost(true);
-              }}
-            />
-            <MenuIcon
-              className="icon"
-              onClick={() => {
-                openMenu(true);
-              }}
-            />
-            <div className="avatar">
-              <img src="" alt="" />
-              <p>Name</p>
+          <div className="nav">
+            <Link to="/">
+              <HomeIcon className="icon" />
+            </Link>
+            <HeartIcon className="icon" />
+            <PlusIcon className="icon" onClick={open} />
+            <MenuIcon className="icon" />
+            <div>
+              <Link to={`/profile/${user?.nickname}`}>
+                {user && <p>{user.nickname}</p>}
+                {user?.avatar && <img src={user?.avatar?.url} alt="" />}
+              </Link>
             </div>
           </div>
-        </main>
+        </nav>
       </header>
-      <Modal open={addPost} onClose={closeAddPost}>
+      <Modal open={addP} onClose={close}>
         <>
-          <AddPost />
+          <CreatePostComponent />
         </>
       </Modal>
     </>

@@ -1,22 +1,26 @@
 import "./App.css";
-import { Route, Routes , } from "react-router-dom";
-import Home from "pages/home";
+import { useRecoilValue } from "recoil";
+import { loadingUserState } from "atoms/userAtoms";
+import LoadingUserComponent from "components/LoadingUser";
+import { Outlet } from "react-router-dom";
+import { CreatePostProvider } from "context/CreatePostContext";
 import Navbar from "components/Navbar";
-import Profile from "pages/profile";
-import { AddPostProvider } from "contexts/AddPostContext";
-import Login from "pages/auth/login";
 
 function App() {
+  const loadingUser = useRecoilValue(loadingUserState);
+
   return (
     <>
-      <AddPostProvider>
-        <Navbar />
-      </AddPostProvider>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      {loadingUser ? (
+        <LoadingUserComponent />
+      ) : (
+        <>
+          <CreatePostProvider>
+            <Navbar />
+          </CreatePostProvider>
+          <Outlet />
+        </>
+      )}
     </>
   );
 }

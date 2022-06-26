@@ -1,6 +1,4 @@
-import "./index.css";
-
-function Label({ children, type, id, className, onChange, text }) {
+function Label({ children, type, id, className, onChange, text, accept }) {
   return (
     <label htmlFor={id} className={className}>
       <input
@@ -8,6 +6,7 @@ function Label({ children, type, id, className, onChange, text }) {
         id={id}
         onChange={onChange}
         style={{ display: "none" }}
+        accept={accept}
       />
       {children}
       {text}

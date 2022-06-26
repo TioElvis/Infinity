@@ -1,24 +1,14 @@
 import "./index.css";
-import {
-  addPostState,
-  descriptionState,
-  imageState,
-  isDiscardPostState,
-} from "atoms/AddPost";
 import { useSetRecoilState } from "recoil";
+import { isDiscardPostState } from "atoms/createPostAtoms";
+import { useContext } from "react";
+import { CreatePostContext } from "context/CreatePostContext";
 
-function AreYouSureToDiscardThePost() {
+function IsDiscardPost() {
   const openIsDiscardPostState = useSetRecoilState(isDiscardPostState);
-  const setImage = useSetRecoilState(imageState);
-  const setDescription = useSetRecoilState(descriptionState);
-  const openAddPost = useSetRecoilState(addPostState);
 
-  const closeAll = () => {
-    setImage(null);
-    setDescription("");
-    openAddPost(false);
-    openIsDiscardPostState(false);
-  };
+  const contextCreatePost = useContext(CreatePostContext);
+  const { closeAll } = contextCreatePost;
 
   const closeAreYouSureToDiscardThePost = () => {
     openIsDiscardPostState(false);
@@ -39,4 +29,4 @@ function AreYouSureToDiscardThePost() {
   );
 }
 
-export default AreYouSureToDiscardThePost;
+export default IsDiscardPost;

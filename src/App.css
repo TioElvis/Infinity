@@ -1,15 +1,8 @@
 .icon {
-  width: 1.3rem;
+  width: 1.2rem;
   cursor: pointer;
 }
 
-textarea {
-  resize: none;
-  border: none;
-  outline: none;
-}
-
-button {
-  border: none;
-  cursor: pointer;
+.icon:hover {
+  opacity: 0.8;
 }

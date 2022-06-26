@@ -9,10 +9,47 @@
 
 :root {
   --font-family: "Nunito", sans-serif;
-  --navbar: rgb(27, 27, 27);
-  --white: rgb(225, 225, 225);
-  --input: rgb(61, 61, 61);
-  --addPost: var(--navbar);
-  --red: rgb(238, 8, 8);
-  --hover: rgb(79, 79, 79);
+  --purple: #51279a;
+  --backgroundApp: #000000;
+  --letterColorWhite: rgb(242, 242, 242);
+  --letterColorBlack: var(--backgroundAddPost);
+  --inputNavbar: rgb(61, 61, 61);
+  --auth: rgb(35, 35, 35);
+  --backgroundAuth: #18191a;
+  --backgroundNavbar: #18191a;
+  --hoverAvatarNavbar: rgb(79, 79, 79);
+  --blueLight: rgb(9, 123, 161);
+  --backgroundAddPost: var(--backgroundAuth);
+  --redLight: red;
+  --borderPost: rgb(239, 239, 239);
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: var(--letterColorWhite);
+}
+
+textarea {
+  resize: none;
+  border: none;
+  outline: none;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
