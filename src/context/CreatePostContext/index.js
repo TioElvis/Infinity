@@ -42,6 +42,7 @@ export const CreatePostProvider = ({ children }) => {
   };
 
   const closeAll = () => {
+    setFile(null);
     setImage(null);
     setDescription("");
     openIsDiscardPost(false);
