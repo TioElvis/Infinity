@@ -19,6 +19,8 @@ module.exports = {
         "auth-background": "var(--auth-background)",
         "form-backgound-auth": "var(--form-backgound-auth)",
         "button-backgound-auth": "var(--button-background-auth)",
+        "peopleLikePostComponent-background":
+          "var(--peopleLikePostComponent-background)",
       },
     },
   },

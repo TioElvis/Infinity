@@ -42,6 +42,7 @@ export const CreatePostProvider = ({ children }) => {
   };
 
   const closeAll = () => {
+      
     setImage(null);
     setDescription("");
     openIsDiscardPost(false);
@@ -72,9 +73,9 @@ export const CreatePostProvider = ({ children }) => {
     try {
       const res = await createPost({ post: formdata, userId: userId });
       if (res.status === 201) {
-        closeAll();
         setLoadingCreatePost(false);
         navigate(`/post/${res.data}`);
+        closeAll();
       }
     } catch (err) {
       console.log(err);

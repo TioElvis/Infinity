@@ -53,3 +53,12 @@ export const getNewPosts = async ({ userId }) => {
     status,
   };
 };
+
+export const getPeopleLikePost = async ({ postId }) => {
+  const { data, status } = await axios.get(`post/getPeopleLikePost/${postId}`);
+
+  return {
+    data,
+    status,
+  };
+};

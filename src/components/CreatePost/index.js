@@ -23,7 +23,7 @@ function CreatePostComponent() {
   return (
     <>
       <div
-        className="pt-3 pb-3 rounded-sm m-auto  mt-48 text-white bg-createPost-background"
+        className="pt-3 pb-3 rounded-sm m-auto  mt-48 text-white bg-createPost-background rounded-lg"
         style={{
           width: "30rem",
         }}>

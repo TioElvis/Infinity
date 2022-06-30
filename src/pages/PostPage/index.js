@@ -1,4 +1,3 @@
-import { Modal } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPostById } from "services/post";
@@ -6,7 +5,6 @@ import { getPostById } from "services/post";
 function PostPage() {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
-  const [a, b] = useState(true);
 
   useEffect(() => {
     const post = async () => {
@@ -18,15 +16,7 @@ function PostPage() {
     post();
   }, [postId]);
 
-  return (
-    <>
-      <Modal open={a}>
-        <>
-          <div>a</div>
-        </>
-      </Modal>
-    </>
-  );
+  return <div>a</div>;
 }
 
 export default PostPage;

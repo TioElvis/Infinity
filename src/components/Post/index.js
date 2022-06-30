@@ -6,9 +6,13 @@ import {
 import { HeartIcon as HeartRed } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import { PostContext } from "context/PostContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { Modal } from "@mui/material";
+import PeopleLikePostComponent from "components/PeopleLikePostComponent";
 
 function Post() {
+  const [peopleLikePostComponent, openPeopleLikePostComponent] =
+    useState(false);
   const contextPost = useContext(PostContext);
   const {
     likes,
@@ -70,7 +74,13 @@ function Post() {
                 ) : (
                   <HeartIcon className="icon text-black" onClick={handleLike} />
                 )}
-                <p className="text-xs text-black">{likes}</p>
+                <p
+                  className="text-xs text-black"
+                  onClick={() => {
+                    openPeopleLikePostComponent(true);
+                  }}>
+                  {likes}
+                </p>
               </>
             )}
           </div>
@@ -84,6 +94,13 @@ function Post() {
           )}
         </div>
       </article>
+      <Modal
+        open={peopleLikePostComponent}
+        onClose={() => openPeopleLikePostComponent(false)}>
+        <>
+          <PeopleLikePostComponent postId={postId} />
+        </>
+      </Modal>
     </>
   );
 }
