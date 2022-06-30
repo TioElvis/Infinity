@@ -74,7 +74,7 @@ export const CreatePostProvider = ({ children }) => {
       if (res.status === 201) {
         closeAll();
         setLoadingCreatePost(false);
-        navigate(`/post/${res.data}`);
+        navigate(`/`);
       }
     } catch (err) {
       console.log(err);
