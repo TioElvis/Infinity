@@ -1,100 +1,82 @@
-import "./index.css";
 import Label from "components/Label";
 import { ArrowLeftIcon, PhotographIcon } from "@heroicons/react/outline";
-import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  descriptionState,
-  imageState,
-  isDiscardPostState,
-} from "atoms/createPostAtoms";
 import { Modal } from "@mui/material";
-import { useContext, useState } from "react";
-import { createPost } from "services/post";
-import { userIdState, userState } from "atoms/userAtoms";
+import { useContext } from "react";
 import IsDiscardPost from "components/isDiscardPost";
 import { CreatePostContext } from "context/CreatePostContext";
 
 function CreatePostComponent() {
-  const user = useRecoilValue(userState);
-  const userId = useRecoilValue(userIdState);
-  const [file, setFile] = useState(null);
-  const [image, setImage] = useRecoilState(imageState);
-  const [description, setDescription] = useRecoilState(descriptionState);
-  const [isDiscardPost, openIsDiscardPost] = useRecoilState(isDiscardPostState);
-  const [loadingPost, setLoadingPost] = useState(false);
-
   const contextCreatePost = useContext(CreatePostContext);
-  const { closeAll } = contextCreatePost;
-
-  const handleImage = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setImage(reader.result);
-      }
-      setFile(e.target.files[0]);
-    };
-    return reader.readAsDataURL(e.target.files[0]);
-  };
-
-  const handleDescription = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const closeIsDiscardPost = () => {
-    openIsDiscardPost(false);
-  };
-
-  const handleCreatePost = async () => {
-    setLoadingPost(true);
-    const formdata = new FormData();
-    formdata.append("image", file);
-    formdata.append("description", description);
-
-    const res = await createPost({ post: formdata, userId: userId });
-
-    if (res.status === 201) {
-      closeAll();
-    }
-  };
-
-  const disable = !description && !image;
+  const {
+    nickname,
+    image,
+    isDiscardPost,
+    loadingCreatePost,
+    disable,
+    openIsDiscardPost,
+    handleImage,
+    handleDescription,
+    handleCreatePost,
+    closeCreatePost,
+  } = contextCreatePost;
 
   return (
     <>
-      <div className="addPost">
-        {loadingPost ? (
-          <section>
+      <div
+        className="pt-3 pb-3 rounded-sm m-auto  mt-48 text-white bg-createPost-background"
+        style={{
+          width: "30rem",
+        }}>
+        {loadingCreatePost ? (
+          <section className="grid place-content-center">
             <h4>Loading...</h4>
           </section>
         ) : (
           <>
-            <header>
-              <ArrowLeftIcon className="icon" />
+            <header className="w-full pl-8 pr-8 flex justify-between">
+              <ArrowLeftIcon className="icon" onClick={closeCreatePost} />
               <h4>Create Post</h4>
-              <button disabled={disable} onClick={handleCreatePost}>
+              <button
+                disabled={disable}
+                onClick={handleCreatePost}
+                className="text-white bg-createPost-background cursor-pointer disabled:cursor-not-allowed">
                 Create
               </button>
             </header>
             <textarea
               onChange={handleDescription}
-              placeholder={`What are you thinking,  ${user.nickname}?`}
+              placeholder={`What are you thinking,  ${nickname}?`}
+              className="w-full h-32 p-5 text-sm text-white bg-createPost-background"
             />
-            {image && <img src={image} alt="" />}
-            <div className="add">
+            {image && (
+              <img
+                src={image}
+                alt=""
+                className="m-auto rounded"
+                style={{
+                  maxWidth: "95%",
+                  maxHeight: "28rem",
+                }}
+              />
+            )}
+            <div>
               <Label
                 type="file"
                 id="inputUploadImage"
                 text="Upload Image"
-                accept=".jpg"
-                onChange={handleImage}>
-                <PhotographIcon className="icon" />
+                onChange={handleImage}
+                className="w-1/4 flex flex-col text-xs text-gray-200 cursor-pointer items-center mt-4">
+                <PhotographIcon className="w-6 hover:opacity-80  text-blue-400" />
               </Label>
             </div>
           </>
         )}
       </div>
-      <Modal open={isDiscardPost} onClose={closeIsDiscardPost}>
+      <Modal
+        open={isDiscardPost}
+        onClose={() => {
+          openIsDiscardPost(false);
+        }}>
         <>
           <IsDiscardPost />
         </>

@@ -1,4 +1,3 @@
-import "./index.css";
 import {
   HeartIcon,
   HomeIcon,
@@ -17,45 +16,55 @@ import CreatePostComponent from "components/CreatePost";
 
 function Navbar() {
   const user = useRecoilValue(userState);
-  const [addP, openAddP] = useRecoilState(createPostState);
+  const [createPost, openCreatePost] = useRecoilState(createPostState);
 
   const contextCreatePost = useContext(CreatePostContext);
-  const { close } = contextCreatePost;
+  const { closeCreatePost } = contextCreatePost;
 
   const open = () => {
-    openAddP(true);
+    openCreatePost(true);
   };
 
   return (
     <>
-      <header className="header">
-        <nav>
+      <header className="w-full h-20 sticky top-0 z-50 bg-navbar-background text-white">
+        <nav className=" w-4/5 h-full flex mr-auto ml-auto justify-between items-center">
           <Link to="/">
-            <h2>Infinity</h2>
+            <h2 className="text-xl">Infinity</h2>
           </Link>
-          <div className="inputSearch">
-            <input type="text" placeholder="Search..." />
-            <div>
-              <SearchIcon className="icon" />
+          <div className="hidden md:flex items-center gap-2">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="p-3 rounded-sm bg-input-background-navbar text-white text-xs md:w-60 lg:w-96"
+            />
+            <div className="p-3 rounded-sm cursor-pointer bg-input-background-navbar">
+              <SearchIcon className="w-4 cursor-pointer hover:opacity-80" />
             </div>
           </div>
-          <div className="nav">
+          <div className="flex items-center gap-2">
             <Link to="/">
               <HomeIcon className="icon" />
             </Link>
             <HeartIcon className="icon" />
             <PlusIcon className="icon" onClick={open} />
             <MenuIcon className="icon" />
-            <div>
-              <Link to={`/profile/${user?.nickname}`}>
-                {user && <p>{user.nickname}</p>}
-                {user?.avatar && <img src={user?.avatar?.url} alt="" />}
-              </Link>
-            </div>
+            <Link
+              to={`/profile/${user?.nickname}`}
+              className="pl-2 pr-2 h-12 flex items-center gap-2 text-sm cursor-pointer rounded-sm hover:bg-a-hover-background-navbar ">
+              {user && <p>{user.nickname}</p>}
+              {user?.avatar && (
+                <img
+                  src={user?.avatar?.url}
+                  alt=""
+                  className="w-8 h-8 rounded-full object-contain"
+                />
+              )}
+            </Link>
           </div>
         </nav>
       </header>
-      <Modal open={addP} onClose={close}>
+      <Modal open={createPost} onClose={closeCreatePost}>
         <>
           <CreatePostComponent />
         </>

@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -10,18 +14,16 @@
 :root {
   --font-family: "Nunito", sans-serif;
   --purple: #51279a;
-  --backgroundApp: #000000;
-  --letterColorWhite: rgb(242, 242, 242);
-  --letterColorBlack: var(--backgroundAddPost);
-  --inputNavbar: rgb(61, 61, 61);
+  --letterColorBlack: var(--backgroundCreatePost);
+  --input-background-navbar: rgb(61, 61, 61);
   --auth: rgb(35, 35, 35);
   --backgroundAuth: #18191a;
-  --backgroundNavbar: #18191a;
-  --hoverAvatarNavbar: rgb(79, 79, 79);
+  --navbar-background: #18191a;
+  --a-hover-background-navbar: rgb(62, 62, 62);
   --blueLight: rgb(9, 123, 161);
-  --backgroundAddPost: var(--backgroundAuth);
-  --redLight: red;
-  --borderPost: rgb(239, 239, 239);
+  --createPost-background: var(--backgroundAuth);
+  --redLight: rgb(210, 35, 35);
+  --border-color-post: rgb(239, 239, 239);
 }
 
 input {

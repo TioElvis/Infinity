@@ -2,9 +2,9 @@ import { userIdState } from "atoms/userAtoms";
 import { createContext, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import {
-  ilikeThatPost,
   giveDislikePost,
   giveLikePost,
+  iLikeThatPost,
 } from "services/post/index";
 
 export const PostContext = createContext();
@@ -20,32 +20,34 @@ export const PostProvider = ({
   comments,
 }) => {
   const userId = useRecoilValue(userIdState);
-  const [isLiked, setIsLiked] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [likes, setLikes] = useState(0);
+  const [Ilike, setILike] = useState(false);
+  const [loadingLikes, setLoadingLikes] = useState(true);
 
   const handleLike = async () => {
-    if (isLiked) {
+    if (!Ilike) {
+      const res = await giveLikePost({ userId, postId });
+      if (res.status === 200) {
+        setLikes(res.data.likes + 1);
+        setILike(res.data.isLiked);
+      }
+    } else {
       const res = await giveDislikePost({ userId, postId });
       if (res.status === 200) {
         setLikes(res.data.likes - 1);
-        setIsLiked(res.data.isLiked);
+        setILike(res.data.isLiked);
       }
-    }
-
-    const res = await giveLikePost({ userId, postId });
-    if (res.status === 200) {
-      setLikes(res.data.likes + 1);
-      setIsLiked(res.data.isLiked);
     }
   };
 
   useEffect(() => {
     const iLike = async () => {
-      const res = await ilikeThatPost({ userId, postId });
-      setLikes(res.data.likes);
-      setIsLiked(res.data.isLiked);
-      setLoading(true);
+      const res = await iLikeThatPost({ userId, postId });
+      if (res.status === 200) {
+        setLikes(res.data.likes);
+        setILike(res.data.isLiked);
+        setLoadingLikes(false);
+      }
     };
     iLike();
   }, [postId, userId]);
@@ -58,10 +60,10 @@ export const PostProvider = ({
         description,
         avatar,
         nickname,
-        loading,
+        loadingLikes,
         handleLike,
         postId,
-        isLiked,
+        Ilike,
         isComment,
         comments,
       }}>

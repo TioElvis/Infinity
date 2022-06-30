@@ -9,7 +9,7 @@ export const createPost = async ({ post, userId }) => {
 };
 
 export const getPostById = async ({ postId }) => {
-  const { data, status } = await axios.get(`/post/${postId}`);
+  const { data, status } = await axios.get(`/post/getPost/${postId}`);
   return {
     data,
     status,
@@ -38,6 +38,15 @@ export const giveDislikePost = async ({ userId, postId }) => {
 
 export const iLikeThatPost = async ({ userId, postId }) => {
   const { data, status } = await axios.get(`/post/iLike/${userId}/${postId}`);
+
+  return {
+    data,
+    status,
+  };
+};
+
+export const getNewPosts = async ({ userId }) => {
+  const { data, status } = await axios.get(`/post/newPosts/${userId}`);
 
   return {
     data,

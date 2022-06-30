@@ -35,7 +35,7 @@ function LoadingUserComponent() {
     }
   }, []);
 
-  return <div className="loadingUser"></div>;
+  return <div></div>;
 }
 
 export default LoadingUserComponent;

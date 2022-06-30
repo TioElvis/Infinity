@@ -5,7 +5,7 @@ function Label({ children, type, id, className, onChange, text, accept }) {
         type={type}
         id={id}
         onChange={onChange}
-        style={{ display: "none" }}
+        className="hidden"
         accept={accept}
       />
       {children}
