@@ -8,6 +8,7 @@ import HomePage from "pages/Home";
 import ProfilePage from "pages/Profile";
 import { StrictMode } from "react";
 import PostPage from "pages/PostPage";
+import RegisterPage from "pages/Auth/Register";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -23,6 +24,7 @@ root.render(
         </Routes>
         <Routes>
           <Route path="/auth/login" element={<LoginPage />} />
+          <Route path="/auth/register" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

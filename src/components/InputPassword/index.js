@@ -1,6 +1,5 @@
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 import { useState } from "react";
-import "./index.css";
 
 function InputPassword({ setPassword }) {
   const [showP, setShowP] = useState(false);
@@ -13,20 +12,19 @@ function InputPassword({ setPassword }) {
     setShowP(false);
   };
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
   return (
     <>
-      <div className="inputPassword">
+      <div className="flex relative">
         <input
           type={showP ? "text" : "password"}
-          onChange={handlePassword}
+          onChange={({ target }) => {
+            setPassword(target.value);
+          }}
           placeholder="Password"
           autoComplete="on"
+          className="input-Auth"
         />
-        <span>
+        <span className="absolute top-3.5 right-4 text-white">
           {showP ? (
             <EyeIcon className="icon" onClick={hiddenPassword} />
           ) : (

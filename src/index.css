@@ -16,14 +16,16 @@
   --purple: #51279a;
   --letterColorBlack: var(--backgroundCreatePost);
   --input-background-navbar: rgb(61, 61, 61);
-  --auth: rgb(35, 35, 35);
-  --backgroundAuth: #18191a;
+  --form-backgound-auth: rgb(35, 35, 35);
+  --auth-background: #18191a;
   --navbar-background: #18191a;
   --a-hover-background-navbar: rgb(62, 62, 62);
   --blueLight: rgb(9, 123, 161);
   --createPost-background: var(--backgroundAuth);
   --redLight: rgb(210, 35, 35);
   --border-color-post: rgb(239, 239, 239);
+  --input-background-auth: var(--input-background-navbar);
+  --button-background-auth: var(--input-background-navbar);
 }
 
 input {
