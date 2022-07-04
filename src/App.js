@@ -1,10 +1,10 @@
 import "./App.css";
+import { loadingUserState } from "atoms/user";
 import { useRecoilValue } from "recoil";
-import { loadingUserState } from "atoms/userAtoms";
-import LoadingUserComponent from "components/LoadingUser";
 import { Outlet } from "react-router-dom";
-import { CreatePostProvider } from "context/CreatePostContext";
-import Navbar from "components/Navbar";
+import LoadingUserComponent from "components/loading-user";
+import HeaderComponent from "components/header";
+import { CreatePostProvider } from "context/create-post";
 
 function App() {
   const loadingUser = useRecoilValue(loadingUserState);
@@ -16,7 +16,7 @@ function App() {
       ) : (
         <>
           <CreatePostProvider>
-            <Navbar />
+            <HeaderComponent />
           </CreatePostProvider>
           <Outlet />
         </>

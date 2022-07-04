@@ -1,25 +1,23 @@
-import "./index.css";
+import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./index.css";
 import App from "./App";
-import LoginPage from "pages/Auth/Login";
 import { RecoilRoot } from "recoil";
-import HomePage from "pages/Home";
-import ProfilePage from "pages/Profile";
-import { StrictMode } from "react";
-import PostPage from "pages/PostPage";
-import RegisterPage from "pages/Auth/Register";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import RegisterPage from "pages/auth/register";
+import LoginPage from "pages/auth/login";
+import HomePage from "pages/home";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <StrictMode>
+  <React.StrictMode>
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/profile/:nickname" element={<ProfilePage />} />
-            <Route path="/post/:postId" element={<PostPage />} />
+            <Route path="/profile/:nickname" element={<></>} />
+            <Route path="/post/:postId" element={<></>} />
           </Route>
         </Routes>
         <Routes>
@@ -28,5 +26,5 @@ root.render(
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
-  </StrictMode>
+  </React.StrictMode>
 );

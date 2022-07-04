@@ -1,7 +1,7 @@
-import InputPassword from "components/InputPassword";
-import { useEffect, useState } from "react";
+import InputPasswordComponent from "components/input-password";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { register } from "services/auth";
+import { register } from "services/auth/register";
 
 function RegisterPage() {
   const [name, setName] = useState("");
@@ -24,19 +24,11 @@ function RegisterPage() {
     }
   };
 
-  const loggedUserId = window.localStorage.getItem("loggedUserId");
-
-  useEffect(() => {
-    if (loggedUserId) {
-      navigate("/");
-    }
-  }, []);
-
   return (
-    <div
-      className="w-screen h-screen bg-auth-background text-white grid place-content-center"
-      onSubmit={handleRegister}>
-      <form className="w-96 h-120 p-7 bg-form-backgound-auth">
+    <div className="w-screen h-screen bg-auth-background text-white grid place-content-center">
+      <form
+        className="w-96 h-120 p-7 bg-form-backgound-auth"
+        onSubmit={handleRegister}>
         <h2>Register</h2>
         <div className="w-full mt-4 flex flex-col gap-1.5">
           <input
@@ -63,7 +55,7 @@ function RegisterPage() {
             }}
             className="input-Auth"
           />
-          <InputPassword setPassword={setPassword} />
+          <InputPasswordComponent setPassword={setPassword} />
           <button
             onClick={handleRegister}
             className="w-40 h-8 ml-auto mr-auto mt-8 text-sm bg-button-backgound-auth text-white hover:opacity-70">

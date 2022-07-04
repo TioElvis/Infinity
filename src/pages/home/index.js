@@ -1,9 +1,9 @@
-import { userIdState } from "atoms/userAtoms";
-import Post from "components/Post";
-import { PostProvider } from "context/PostContext";
+import { userIdState } from "atoms/user";
+import PostComponent from "components/post-components";
+import { PostProvider } from "context/post";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { getNewPosts } from "services/post";
+import { getNewPostsFromMeAndFriends } from "services/post/get/new-posts-from-me-and-friends";
 
 function HomePage() {
   const userId = useRecoilValue(userIdState);
@@ -11,14 +11,14 @@ function HomePage() {
   const [loadingPosts, setLoadingPosts] = useState(true);
 
   useEffect(() => {
-    const newPosts = async () => {
-      const res = await getNewPosts({ userId: userId });
+    const get = async () => {
+      const res = await getNewPostsFromMeAndFriends({ userId: userId });
       if (res.status === 200) {
         setPosts(res.data);
         setLoadingPosts(false);
       }
     };
-    newPosts();
+    get();
   }, []);
 
   return (
@@ -35,17 +35,16 @@ function HomePage() {
             <div>
               {posts.map((post) => {
                 return (
-                  <PostProvider
-                    image={post?.image?.url}
-                    description={post?.description}
-                    nickname={post?.userId?.nickname}
-                    key={post?._id}
-                    isComment={post?.isComment}
-                    postId={post?._id}
-                    avatar={post?.userId?.avatar?.url}
-                    likes={post?.likes}
-                    comments={post?.comments.length}>
-                    <Post />
+                  <PostProvider key={post?._id} postId={post?._id}>
+                    <PostComponent
+                      avatar={post?.userId?.avatar?.url}
+                      nickname={post?.userId?.nickname}
+                      image={post?.image?.url}
+                      description={post?.description}
+                      postId={post?._id}
+                      isLikes={post?.isLikes}
+                      isComment={post?.isComment}
+                    />
                   </PostProvider>
                 );
               })}
@@ -53,7 +52,11 @@ function HomePage() {
           )}
         </div>
       )}
-      <div className="h-auto hidden sticky top-20 grid-cols-2 lg:block">
+      <div
+        className="hidden sticky top-20 grid-cols-2 lg:block"
+        style={{
+          height: "50rem",
+        }}>
         hello
       </div>
     </div>
