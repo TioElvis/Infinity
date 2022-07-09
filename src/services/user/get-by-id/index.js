@@ -1,7 +1,8 @@
 import axios from "services/axios";
 
-export const getUserById = async ({ userId }) => {
+export const getUserByIdService = async ({ userId }) => {
   const { data, status } = await axios.get(`/user/${userId}`);
+
   return {
     data,
     status,

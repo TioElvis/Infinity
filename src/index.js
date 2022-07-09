@@ -1,30 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import App from "./app";
+import React, { StrictMode } from "react";
 import { RecoilRoot } from "recoil";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import RegisterPage from "pages/auth/register";
-import LoginPage from "pages/auth/login";
-import HomePage from "pages/home";
+import ReactDOM from "react-dom/client";
+import { AuthProvider } from "contexts/auth";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <RecoilRoot>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/profile/:nickname" element={<></>} />
-            <Route path="/post/:postId" element={<></>} />
-          </Route>
-        </Routes>
-        <Routes>
-          <Route path="/auth/login" element={<LoginPage />} />
-          <Route path="/auth/register" element={<RegisterPage />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </RecoilRoot>
-  </React.StrictMode>
+  </StrictMode>
 );
